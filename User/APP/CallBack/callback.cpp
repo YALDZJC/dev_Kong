@@ -10,6 +10,7 @@
 
 uint8_t buffer[3] = {0};
 auto uatr_rx_frame = HAL::UART::Data{buffer, 3};
+uint8_t state = 0;
 
 extern "C"
 {
@@ -24,6 +25,9 @@ extern "C"
 
     void InWhile()
     {
+        auto &log = HAL::LOGGER::Logger::getInstance();
+        log.trace("State:%d", BSP::Motor::Dji::Motor6020.getOfflineStatus());
+        BSP::Motor::Dji::Motor6020.UpdateOnline();
     }
 } // extern "C"
 
@@ -44,7 +48,6 @@ void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
         auto &log = HAL::LOGGER::Logger::getInstance();
         pos = static_cast<uint32_t>(BSP::Motor::Dji::Motor6020.getAngleDeg(1));
         assert_always(pos > 10);
-        log.trace("Pos:%d\n", pos);
     }
 }
 

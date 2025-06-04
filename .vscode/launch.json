@@ -28,7 +28,7 @@
                 "enabled": true,
                 "address": "auto",
                 "clearSearch": false,
-                "polling_interval": 20,
+                "polling_interval": 50,
                 "decoders": [
                     {
                         "label": "",

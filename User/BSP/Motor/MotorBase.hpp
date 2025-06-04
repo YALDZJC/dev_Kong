@@ -161,5 +161,18 @@ template <uint8_t N> class MotorBase
 
         return 0; // 所有电机都在线
     }
+
+    /**
+     * @brief 更新在线状态
+     *
+     * @param id 电机编号
+     */
+    void UpdateOnline()
+    {
+        for (uint8_t i = 0; i < N; i++)
+        {
+            this->state_watch_[i].check();
+        }
+    }
 };
 } // namespace BSP::Motor
